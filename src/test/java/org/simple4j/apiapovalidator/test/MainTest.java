@@ -23,7 +23,11 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 public class MainTest
 {
 
+	/**
+	 * Sample API used to test the library. The API does not implement any real business logic
+	 */
     OrderAPI api = null;
+    
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception
 	{

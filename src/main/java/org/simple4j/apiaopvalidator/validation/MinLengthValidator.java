@@ -4,14 +4,19 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
+ * Validator implementation to check the length of a String field
  * 
  * @author jsrinivas108
  *
  */
 public class MinLengthValidator implements FieldValidator, Validator<Object>
 {
-    private Integer minLength = 0;
     private static String validationTypeSuffix = "-minlength";
+    
+    /**
+     * This validator will fail if the length of the String is less than this minLength configuration
+     */
+    private Integer minLength = 0;
     
     public MinLengthValidator()
     {

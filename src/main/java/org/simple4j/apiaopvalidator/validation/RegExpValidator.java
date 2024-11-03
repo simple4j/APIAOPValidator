@@ -4,14 +4,19 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
+ * Validator implementation that checks a String value against a regular expression
  * 
  * @author jsrinivas108
  *
  */
 public class RegExpValidator implements FieldValidator, Validator<Object>
 {
-    private String regExp = null;
     private static String validationTypeSuffix = "-invalid";
+    
+    /**
+     * This validator will fail if the String doesnot match regExp configuration
+     */
+    private String regExp = null;
     
     public RegExpValidator()
     {

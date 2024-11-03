@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
+ * Validator implementation that checks if a value is null. If the value is instance of String, also checks if its empty after trimming
  * 
  * @author jsrinivas108
  *

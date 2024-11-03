@@ -10,7 +10,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
- * Validator entry point for every field of the java API call
+ * Validator entry point for argument of the java API call
  * 
  * @author jsrinivas108
  *
@@ -20,10 +20,30 @@ public class MethodArgumentValidator implements Validator<Object[]>
 {
     private static final Logger LOGGER = LoggerFactory.getLogger(MethodHandles.lookup().lookupClass());
 
+    /**
+     * boolean configuration to do null check as the first step.
+     * Validation will fail if this config is true and the argument at the argumentIndex is null
+     */
     private boolean doNullCheck = true;
+    
+    /**
+     * The index of the argument that will be validated
+     */
     private int argumentIndex = -1;
+    
+    /**
+     * Field name that will be used in the reason code like <fieldName>-<reason>. For example, order-missing
+     */
     private String fieldName = null;
+    
+    /**
+     * Optional property path to be retrieved before applying the validators
+     */
     private String argumentPropertyPath = null;
+    
+    /**
+     * List of validator implementations that will be executed for the field retrieved based on argumentIndex and argumentPropertyPath 
+     */
     private List<Validator> validators = null;
 
     public List<String> validate(String fieldName, Object[] parameterValues)
@@ -136,10 +156,13 @@ public class MethodArgumentValidator implements Validator<Object[]>
     }
 
     @Override
-    public String toString()
-    {
-        return "ParameterValidator [validators=" + validators + ", fieldName=" + fieldName + ", argumentPropertyPath="
-                + argumentPropertyPath + "]";
-    }
+	public String toString()
+	{
+		StringBuilder builder = new StringBuilder();
+		builder.append(super.toString()).append(" [doNullCheck=").append(doNullCheck).append(", argumentIndex=")
+				.append(argumentIndex).append(", fieldName=").append(fieldName).append(", argumentPropertyPath=")
+				.append(argumentPropertyPath).append(", validators=").append(validators).append("]");
+		return builder.toString();
+	}
 
 }

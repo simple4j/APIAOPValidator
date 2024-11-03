@@ -6,7 +6,9 @@ import java.util.Iterator;
 import java.util.List;
 
 /**
- *
+ * This Validator loops through elements of a Collection and execute the elementValidators against each elements.
+ * This can be used when the API argument is a Collection or any field is a Collection in a nested object case.
+ * 
  * @author jsrinivas108
  *
  */
@@ -15,9 +17,27 @@ public class CollectionValidator implements Validator<Collection>
 	private static String minSizeValidationSuffix = "-minsize";
 	private static String maxSizeValidationSuffix = "-maxsize";
 
+    /**
+     * boolean configuration to do null check as the first step.
+     * Validation will fail if this config is true and the collection is null
+     */
 	private boolean doNullCheck = true;
+    
+    /**
+     * Optional configuration to check if the size of the collection is not below an expected number.
+     * Negative value will turn of the minSize validation before proceeding to the element Validators. 
+     */
     private Integer minSize = -1;
+    
+    /**
+     * Optional configuration to check if the size of the collection is not above an expected number.
+     * Negative value will turn of the maxSize validation before proceeding to the element Validators. 
+     */
     private Integer maxSize = -1;
+    
+    /**
+     * List of validator implementations that will be executed against each of the elements in the Collection object 
+     */
     private List<Validator> elementValidators = null;
    
     public CollectionValidator()

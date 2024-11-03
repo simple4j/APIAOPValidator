@@ -4,14 +4,19 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
+ * Validator implementation to check the value of an int or float field
  * 
  * @author jsrinivas108
  *
  */
 public class MinValueValidator implements FieldValidator, Validator<Object>
 {
-    private double minValue = 0;
     private static String validationTypeSuffix = "-minvalue";
+    
+    /**
+     * This validator will fail if the value of the int or float is less than this minValue configuration
+     */
+    private double minValue = 0;
     
     public MinValueValidator()
     {

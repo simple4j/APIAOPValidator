@@ -20,7 +20,7 @@ import org.simple4j.apiaopvalidator.beans.ErrorDetails;
 import org.simple4j.apiaopvalidator.validation.MethodArgumentValidator;
 
 /**
- * This interceptor will trigger field validations using AOP before java API is called and 
+ * This interceptor will trigger API parameter validations using AOP before java API is called and
  * returns any failures to web API layer. The validation rules can be configured using Spring xml
  * without any hardcoding or hardwiring in the java API implementation class.
  * 
@@ -31,6 +31,9 @@ public class ParametersValidationInterceptor implements MethodInterceptor
 {
     private static final Logger LOGGER = LoggerFactory.getLogger(MethodHandles.lookup().lookupClass());
 
+    /**
+     * Map of API call method signature string as key and value is an array of MethodArgumentValidator those needs to be executed
+     */
     private Map<String, MethodArgumentValidator[]> method2Validators = null;
     
     @Override
@@ -50,18 +53,6 @@ public class ParametersValidationInterceptor implements MethodInterceptor
         }
         else
         {
-//            HashMap<String, Object> parametersMap = new HashMap<>();
-//            for (int i = 0 ; i < parameters.length ; i++)
-//            {
-//                if(parameterValidators[i] != null)
-//                {
-//                    String fieldName = parameterValidators[i].getFieldName();
-//                    LOGGER.trace("fieldName {}", fieldName);
-//                    Object argument = arguments[i];
-//                    parametersMap.put(fieldName, argument);
-//                }
-//            }
-//            LOGGER.debug("parametersMap {}", parametersMap);
             List<String> errorReason = null;
 
             for(int i = 0 ; i < parameterValidators.length ; i++)
@@ -89,6 +80,11 @@ public class ParametersValidationInterceptor implements MethodInterceptor
         return methodInvocation.proceed();
     }
 
+    /**
+     * getter method for method2Validators. If it is null, the method will throw RuntimeException
+     * 
+     * @return
+     */
     public Map<String, MethodArgumentValidator[]> getMethod2Validators()
     {
         if(this.method2Validators == null)
@@ -96,6 +92,10 @@ public class ParametersValidationInterceptor implements MethodInterceptor
         return method2Validators;
     }
 
+    /**
+     * setter method for method2Validators configuration
+     * @param method2Validators
+     */
     public void setMethod2Validators(Map<String, MethodArgumentValidator[]> method2Validators)
     {
         this.method2Validators = method2Validators;

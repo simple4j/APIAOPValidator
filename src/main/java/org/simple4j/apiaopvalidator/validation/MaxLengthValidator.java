@@ -4,14 +4,19 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
+ * Validator implementation to check the length of a String field
  * 
  * @author jsrinivas108
  *
  */
 public class MaxLengthValidator implements FieldValidator, Validator<Object>
 {
-    private Integer maxLength = 0;
     private static String validationTypeSuffix = "-maxlength";
+    
+    /**
+     * This validator will fail if the length of the String is more than this maxLength configuration
+     */
+    private Integer maxLength = 0;
     
     public MaxLengthValidator()
     {

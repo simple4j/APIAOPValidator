@@ -238,7 +238,7 @@
 		</plugins>
 	</build>
 	<description>
-	This is a simple validation library for web services API using AOP.
+	This is a simple configurable validation library for web services API validation using AOP.
 	</description>
 	<properties>
 		<maven.compiler.source>17</maven.compiler.source>

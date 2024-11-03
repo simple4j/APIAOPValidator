@@ -4,14 +4,19 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
+ * Validator implementation to check the value of an int or float field
  * 
  * @author jsrinivas108
  *
  */
 public class MaxValueValidator implements FieldValidator, Validator<Object>
 {
-    private double maxValue = 0;
     private static String validationTypeSuffix = "-maxvalue";
+    
+    /**
+     * This validator will fail if the value of the int or float is more than this maxValue configuration
+     */
+    private double maxValue = 0;
     
     public MaxValueValidator()
     {

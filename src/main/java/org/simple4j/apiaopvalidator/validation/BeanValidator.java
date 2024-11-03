@@ -10,7 +10,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
- * Validator entry point for every field of the java API call
+ * Validator implementation to validate any field of a java bean parameter.
+ * The java bean can be the method argument or an intermediate object in a complex nested object argument 
  * 
  * @author jsrinivas108
  *
@@ -19,10 +20,26 @@ import org.slf4j.LoggerFactory;
 public class BeanValidator implements Validator<Object>
 {
     private static final Logger LOGGER = LoggerFactory.getLogger(MethodHandles.lookup().lookupClass());
-
+	
+    /**
+     * boolean configuration to do null check as the first step.
+     * Validation will fail if this config is true and the bean is null
+     */
     private boolean doNullCheck = true;
+    
+    /**
+     * Field name that will be used in the reason code like <fieldName>-<reason>. For example, order-missing
+     */
     private String fieldName = null;
+    
+    /**
+     * Property path to be retrieved on which the validators gets executed
+     */
     private String propertyPath = null;
+    
+    /**
+     * List of validator implementations that will be executed on the value retrieved based on propertyPath 
+     */
     private List<Validator> validators = null;
 
     public List<String> validate(String fieldName, Object beanValues)
@@ -113,6 +130,8 @@ public class BeanValidator implements Validator<Object>
 
 	public String getPropertyPath()
     {
+		if(this.propertyPath == null)
+            throw new RuntimeException("propertyPath not configured");
         return propertyPath;
     }
 
@@ -122,10 +141,12 @@ public class BeanValidator implements Validator<Object>
     }
 
     @Override
-    public String toString()
-    {
-        return "ParameterValidator [validators=" + validators + ", fieldName=" + fieldName + ", propertyPath="
-                + propertyPath + "]";
-    }
+	public String toString()
+	{
+		StringBuilder builder = new StringBuilder();
+		builder.append(super.toString()).append(" [doNullCheck=").append(doNullCheck).append(", fieldName=").append(fieldName)
+				.append(", propertyPath=").append(propertyPath).append(", validators=").append(validators).append("]");
+		return builder.toString();
+	}
 
 }
