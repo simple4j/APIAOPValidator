@@ -1,22 +1,25 @@
 package org.simple4j.apiaopvalidator.validation;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * 
  * @author jsrinivas108
  *
  */
-public class RegExpValidator extends Validator
+public class RegExpValidator implements FieldValidator, Validator<Object>
 {
     private String regExp = null;
+    private static String validationTypeSuffix = "-invalid";
     
     public RegExpValidator()
     {
         super();
-        this.validationTypeSuffix = "-invalid";
     }
 
     @Override
-    public String validate(String fieldName, Object value)
+    public List<String> validate(String fieldName, Object value)
     {
         if(value == null)
             return null;
@@ -33,7 +36,9 @@ public class RegExpValidator extends Validator
         
         if(!strValue.matches(this.getRegExp()))
         {
-            return fieldName + this.validationTypeSuffix;
+        	List<String> ret = new ArrayList<String>();
+        	ret.add(fieldName + this.validationTypeSuffix);
+            return ret;
         }
         return null;
     }

@@ -1,14 +1,8 @@
 package org.simple4j.apiaopvalidator.validation;
 
-/**
- * 
- * @author jsrinivas108
- *
- */
-public abstract class Validator
-{
+import java.util.List;
 
-    protected String validationTypeSuffix = null;
-    
-    abstract public String validate(String fieldName, Object value);
+public interface Validator<T>
+{
+	public List<String> validate(String fieldName, T value);
 }

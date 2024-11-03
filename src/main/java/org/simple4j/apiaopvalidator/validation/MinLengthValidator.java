@@ -1,22 +1,25 @@
 package org.simple4j.apiaopvalidator.validation;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * 
  * @author jsrinivas108
  *
  */
-public class MinLengthValidator extends Validator
+public class MinLengthValidator implements FieldValidator, Validator<Object>
 {
     private Integer minLength = 0;
+    private static String validationTypeSuffix = "-minlength";
     
     public MinLengthValidator()
     {
         super();
-        this.validationTypeSuffix = "-minlength";
     }
 
     @Override
-    public String validate(String fieldName, Object value)
+    public List<String> validate(String fieldName, Object value)
     {
         if(value == null)
             return null;
@@ -33,7 +36,9 @@ public class MinLengthValidator extends Validator
         
         if(value == null || strValue.length() < this.getMinLength())
         {
-            return fieldName + this.validationTypeSuffix;
+        	List<String> ret = new ArrayList<String>();
+        	ret.add(fieldName + this.validationTypeSuffix);
+            return ret;
         }
         return null;
     }

@@ -1,22 +1,25 @@
 package org.simple4j.apiaopvalidator.validation;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * 
  * @author jsrinivas108
  *
  */
-public class MaxLengthValidator extends Validator
+public class MaxLengthValidator implements FieldValidator, Validator<Object>
 {
     private Integer maxLength = 0;
+    private static String validationTypeSuffix = "-maxlength";
     
     public MaxLengthValidator()
     {
         super();
-        this.validationTypeSuffix = "-maxlength";
     }
 
     @Override
-    public String validate(String fieldName, Object value)
+    public List<String> validate(String fieldName, Object value)
     {
         if(value == null)
             return null;
@@ -32,7 +35,9 @@ public class MaxLengthValidator extends Validator
         
         if(strValue.length() > this.getMaxLength())
         {
-            return fieldName + this.validationTypeSuffix;
+        	List<String> ret = new ArrayList<String>();
+        	ret.add(fieldName + this.validationTypeSuffix);
+            return ret;
         }
         return null;
     }

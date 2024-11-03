@@ -17,7 +17,7 @@ import org.slf4j.LoggerFactory;
 
 import org.simple4j.apiaopvalidator.beans.AppResponse;
 import org.simple4j.apiaopvalidator.beans.ErrorDetails;
-import org.simple4j.apiaopvalidator.validation.ParameterValidator;
+import org.simple4j.apiaopvalidator.validation.MethodArgumentValidator;
 
 /**
  * This interceptor will trigger field validations using AOP before java API is called and 
@@ -31,7 +31,7 @@ public class ParametersValidationInterceptor implements MethodInterceptor
 {
     private static final Logger LOGGER = LoggerFactory.getLogger(MethodHandles.lookup().lookupClass());
 
-    private Map<String, ParameterValidator[]> method2Validators = null;
+    private Map<String, MethodArgumentValidator[]> method2Validators = null;
     
     @Override
     public Object invoke(MethodInvocation methodInvocation) throws Throwable
@@ -42,7 +42,7 @@ public class ParametersValidationInterceptor implements MethodInterceptor
         
         String targetMethodSignature = method.toString();
         
-        ParameterValidator[] parameterValidators = this.getMethod2Validators().get(targetMethodSignature);
+        MethodArgumentValidator[] parameterValidators = this.getMethod2Validators().get(targetMethodSignature);
         
         if(parameterValidators == null)
         {
@@ -50,26 +50,32 @@ public class ParametersValidationInterceptor implements MethodInterceptor
         }
         else
         {
-            HashMap<String, Object> parametersMap = new HashMap<>();
-            for (int i = 0 ; i < parameters.length ; i++)
-            {
-                if(parameterValidators[i] != null)
-                {
-                    String fieldName = parameterValidators[i].getFieldName();
-                    LOGGER.trace("fieldName {}", fieldName);
-                    Object argument = arguments[i];
-                    parametersMap.put(fieldName, argument);
-                }
-            }
-            LOGGER.debug("parametersMap {}", parametersMap);
-            List<String> errorReason = new ArrayList<String>();
-            
+//            HashMap<String, Object> parametersMap = new HashMap<>();
+//            for (int i = 0 ; i < parameters.length ; i++)
+//            {
+//                if(parameterValidators[i] != null)
+//                {
+//                    String fieldName = parameterValidators[i].getFieldName();
+//                    LOGGER.trace("fieldName {}", fieldName);
+//                    Object argument = arguments[i];
+//                    parametersMap.put(fieldName, argument);
+//                }
+//            }
+//            LOGGER.debug("parametersMap {}", parametersMap);
+            List<String> errorReason = null;
+
             for(int i = 0 ; i < parameterValidators.length ; i++)
             {
-                errorReason.addAll(parameterValidators[i].validate(parametersMap));
+                List<String> result = parameterValidators[i].validate(null,arguments);
+                if(result != null && result.size() > 0)
+                {
+                	if(errorReason == null)
+                		errorReason = new ArrayList<String>();
+    				errorReason.addAll(result);
+                }
             }
             
-            if(errorReason.size() > 0)
+            if(errorReason != null && errorReason.size() > 0)
             {
                 AppResponse ret = new AppResponse();
                 ErrorDetails errorDetails = new ErrorDetails();
@@ -83,14 +89,14 @@ public class ParametersValidationInterceptor implements MethodInterceptor
         return methodInvocation.proceed();
     }
 
-    public Map<String, ParameterValidator[]> getMethod2Validators()
+    public Map<String, MethodArgumentValidator[]> getMethod2Validators()
     {
         if(this.method2Validators == null)
             throw new RuntimeException("method2Validators not configured in ParametersValidationInterceptor");
         return method2Validators;
     }
 
-    public void setMethod2Validators(Map<String, ParameterValidator[]> method2Validators)
+    public void setMethod2Validators(Map<String, MethodArgumentValidator[]> method2Validators)
     {
         this.method2Validators = method2Validators;
     }
