@@ -85,21 +85,6 @@
 			<version>6.1.13</version>
 			<scope>test</scope>
 		</dependency>
-		<!---
-		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-jdbc</artifactId>
-			<version>6.1.13</version>
-			<scope>test</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-tx</artifactId>
-			<version>6.1.13</version>
-			<scope>test</scope>
-		</dependency>
-		-->
-
 
 		<!-- Runtime dependencies -->
 		<dependency>
