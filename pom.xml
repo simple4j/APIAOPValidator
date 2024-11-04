@@ -2,11 +2,11 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>org.simple4j</groupId>
-	<artifactId>APIAPOValidator</artifactId>
+	<artifactId>APIAOPValidator</artifactId>
 	<packaging>jar</packaging>
-	<version>24.11.03.0</version>
-	<name>APIAPOValidator</name>
-	<url>https://github.com/simple4j/APIAPOValidator</url>
+	<version>24.11.03.0-SNAPSHOT</version>
+	<name>APIAOPValidator</name>
+	<url>https://github.com/simple4j/APIAOPValidator</url>
 	<licenses>
 		<license>
 			<name>MIT License</name>
@@ -22,10 +22,10 @@
 		</developer>
 	</developers>
 	<scm>
-		<connection>scm:git:https://github.com/simple4j/APIAPOValidator.git</connection>
-		<developerConnection>scm:git:https://github.com/simple4j/APIAPOValidator.git</developerConnection>
-		<url>https://github.com/simple4j/APIAPOValidator</url>
-	  <tag>APIAPOValidator-24.11.03.0</tag>
+		<connection>scm:git:https://github.com/simple4j/APIAOPValidator.git</connection>
+		<developerConnection>scm:git:https://github.com/simple4j/APIAOPValidator.git</developerConnection>
+		<url>https://github.com/simple4j/APIAOPValidator</url>
+	  <tag>HEAD</tag>
 	</scm>
 	<distributionManagement>
 		<snapshotRepository>
