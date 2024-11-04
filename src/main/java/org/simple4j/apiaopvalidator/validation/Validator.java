@@ -11,7 +11,7 @@ public interface Validator<T>
 {
 	/**
 	 * This method takes a fieldName and field value as parameters.
-	 * If any validation fails, the reason is returned as strings of <fieldName>-<reason>.
+	 * If any validation fails, the reason is returned as strings of {fieldName}-{reason}.
 	 * For example, order-empty  
 	 * 
 	 * @param fieldName

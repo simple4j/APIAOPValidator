@@ -16,7 +16,7 @@ public class ErrorDetails {
 	public String errorId = null;
 	
 	/**
-	 * Type of the error. For example PARAMETER_ERROR, <somethiig>_NOTFOUND, etc.
+	 * Type of the error. For example PARAMETER_ERROR, {somethiig}_NOTFOUND, etc.
 	 */
 	public String errorType = null;
 	

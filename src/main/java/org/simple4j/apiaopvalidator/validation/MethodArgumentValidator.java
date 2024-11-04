@@ -32,7 +32,7 @@ public class MethodArgumentValidator implements Validator<Object[]>
     private int argumentIndex = -1;
     
     /**
-     * Field name that will be used in the reason code like <fieldName>-<reason>. For example, order-missing
+     * Field name that will be used in the reason code like {fieldName}-{reason}. For example, order-missing
      */
     private String fieldName = null;
     
