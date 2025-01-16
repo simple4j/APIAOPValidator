@@ -57,7 +57,7 @@ public class MainTest
 		AppResponse<String> placeOrderResponse = api.placeOrder(null);
 		System.out.println("placeOrderResponse = " + placeOrderResponse);
 		boolean testResult = baseResponseCheck(placeOrderResponse) && 
-				placeOrderResponse.errorDetails.errorReason.contains("[0]-missing");
+				placeOrderResponse.errorDetails.errorReason.contains("orderItems-missing");
 		Assert.assertTrue("testPlaceOrderNullAgument", testResult);
 	}
 
@@ -288,7 +288,7 @@ public class MainTest
 		AppResponse<Order> getOrderResponse = api.getOrder(orderId );
 		System.out.println("getOrderResponse = " + getOrderResponse);
 		boolean testResult = baseResponseCheck(getOrderResponse) && 
-				getOrderResponse.errorDetails.errorReason.contains("[0]-missing");
+				getOrderResponse.errorDetails.errorReason.contains("orderId-missing");
 		Assert.assertTrue("testGetOrderNullArgument", testResult);
 	}
 
@@ -331,7 +331,7 @@ public class MainTest
 		AppResponse<List<String>> placeBulkOrdersResponse = api.placeBulkOrders((Order[])null);
 		System.out.println("placeBulkOrdersResponse = " + placeBulkOrdersResponse);
 		boolean testResult = baseResponseCheck(placeBulkOrdersResponse) && 
-				placeBulkOrdersResponse.errorDetails.errorReason.contains("[0]-missing");
+				placeBulkOrdersResponse.errorDetails.errorReason.contains("orders-missing");
 		Assert.assertTrue("testPlaceBulkOrdersCollNullAgument", testResult);
 	}
 
@@ -402,7 +402,7 @@ public class MainTest
 		AppResponse<List<String>> placeBulkOrdersResponse = api.placeBulkOrders((Map)null);
 		System.out.println("placeBulkOrdersResponse = " + placeBulkOrdersResponse);
 		boolean testResult = baseResponseCheck(placeBulkOrdersResponse) && 
-				placeBulkOrdersResponse.errorDetails.errorReason.contains("[0]-missing");
+				placeBulkOrdersResponse.errorDetails.errorReason.contains("orders-missing");
 		Assert.assertTrue("testPlaceBulkOrdersMapNullAgument", testResult);
 	}
 

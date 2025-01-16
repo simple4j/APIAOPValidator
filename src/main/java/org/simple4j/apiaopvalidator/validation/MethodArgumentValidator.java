@@ -57,7 +57,7 @@ public class MethodArgumentValidator implements Validator<Object[]>
         	if(this.doNullCheck)
         	{
         		ret = new ArrayList<String>();
-            	ret.add("[" + this.getArgumentIndex() + "]" + NullValidator.NULL_CHECK_VALIDATION_SUFFIX);
+            	ret.add(this.getFieldName() + NullValidator.NULL_CHECK_VALIDATION_SUFFIX);
             	return ret;
         	}
         	else
