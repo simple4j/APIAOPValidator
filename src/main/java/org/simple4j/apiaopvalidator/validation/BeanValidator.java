@@ -9,6 +9,8 @@ import org.apache.commons.beanutils.PropertyUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.fasterxml.jackson.annotation.JsonRootName;
+
 /**
  * Validator implementation to validate any field of a java bean parameter.
  * The java bean can be the method argument or an intermediate object in a complex nested object argument 
@@ -17,6 +19,7 @@ import org.slf4j.LoggerFactory;
  *
  */
 @SuppressWarnings("hiding")
+@JsonRootName(value = "BeanValidator")
 public class BeanValidator implements Validator<Object>
 {
     private static final Logger LOGGER = LoggerFactory.getLogger(MethodHandles.lookup().lookupClass());

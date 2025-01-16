@@ -3,12 +3,15 @@ package org.simple4j.apiaopvalidator.validation;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonRootName;
+
 /**
  * Validator implementation to check the value of an int or float field
  * 
  * @author jsrinivas108
  *
  */
+@JsonRootName(value = "MaxValueValidator")
 public class MaxValueValidator implements FieldValidator, Validator<Object>
 {
     private static String validationTypeSuffix = "-maxvalue";

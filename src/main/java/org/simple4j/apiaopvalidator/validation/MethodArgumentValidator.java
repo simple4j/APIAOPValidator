@@ -9,6 +9,8 @@ import org.apache.commons.beanutils.PropertyUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.fasterxml.jackson.annotation.JsonRootName;
+
 /**
  * Validator entry point for argument of the java API call
  * 
@@ -16,6 +18,7 @@ import org.slf4j.LoggerFactory;
  *
  */
 @SuppressWarnings("hiding")
+@JsonRootName(value = "MethodArgumentValidator")
 public class MethodArgumentValidator implements Validator<Object[]>
 {
     private static final Logger LOGGER = LoggerFactory.getLogger(MethodHandles.lookup().lookupClass());

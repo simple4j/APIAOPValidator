@@ -3,12 +3,15 @@ package org.simple4j.apiaopvalidator.validation;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonRootName;
+
 /**
  * Validator implementation to check the length of a String field
  * 
  * @author jsrinivas108
  *
  */
+@JsonRootName(value = "MinLengthValidator")
 public class MinLengthValidator implements FieldValidator, Validator<Object>
 {
     private static String validationTypeSuffix = "-minlength";

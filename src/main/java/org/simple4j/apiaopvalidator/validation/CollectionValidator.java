@@ -5,6 +5,8 @@ import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonRootName;
+
 /**
  * This Validator loops through elements of a Collection and execute the elementValidators against each elements.
  * This can be used when the API argument is a Collection or any field is a Collection in a nested object case.
@@ -12,6 +14,7 @@ import java.util.List;
  * @author jsrinivas108
  *
  */
+@JsonRootName(value = "CollectionValidator")
 public class CollectionValidator implements Validator<Collection>
 {
 	private static String minSizeValidationSuffix = "-minsize";

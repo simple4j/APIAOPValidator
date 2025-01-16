@@ -3,12 +3,15 @@ package org.simple4j.apiaopvalidator.validation;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonRootName;
+
 /**
  * Validator implementation that checks if a value is null. If the value is instance of String, also checks if its empty after trimming
  * 
  * @author jsrinivas108
  *
  */
+@JsonRootName(value = "NullValidator")
 public class NullValidator implements FieldValidator, Validator<Object>
 {
 

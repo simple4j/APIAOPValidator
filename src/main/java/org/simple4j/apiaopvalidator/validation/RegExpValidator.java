@@ -3,12 +3,15 @@ package org.simple4j.apiaopvalidator.validation;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonRootName;
+
 /**
  * Validator implementation that checks a String value against a regular expression
  * 
  * @author jsrinivas108
  *
  */
+@JsonRootName(value = "RegExpValidator")
 public class RegExpValidator implements FieldValidator, Validator<Object>
 {
     private static String validationTypeSuffix = "-invalid";

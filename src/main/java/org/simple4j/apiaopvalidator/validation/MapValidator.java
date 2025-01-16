@@ -7,6 +7,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
+import com.fasterxml.jackson.annotation.JsonRootName;
+
 /**
  * This Validator loops through all entries of a Map and execute the entryValidators against each entry.
  * This can be used when the API argument is a Map or any field is a Map in a nested object case.
@@ -14,6 +16,7 @@ import java.util.Map.Entry;
  * @author jsrinivas108
  *
  */
+@JsonRootName(value = "MapValidator")
 public class MapValidator implements Validator<Map>
 {
 	private static String minSizeValidationSuffix = "-minsize";

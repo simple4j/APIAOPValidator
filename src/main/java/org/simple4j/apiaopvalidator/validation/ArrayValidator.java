@@ -5,6 +5,8 @@ import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonRootName;
+
 /**
  * This Validator loops through elements of an array and execute the elementValidators against each elements.
  * This can be used when the API argument is an array or any field is an array in a nested object case.
@@ -12,6 +14,7 @@ import java.util.List;
  * @author jsrinivas108
  *
  */
+@JsonRootName(value = "ArrayValidator")
 public class ArrayValidator implements Validator<Object[]>
 {
 	private static String minSizeValidationSuffix = "-minsize";
