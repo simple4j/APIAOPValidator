@@ -480,6 +480,17 @@ public class MainTest
 		Assert.assertTrue("testPlaceBulkOrdersMapSuccess", testResult);
 	}
 
+	@Test
+	public void testPlaceBulkOrdersMapDummySuccess()
+	{
+		Map<String, Order> orders = new HashMap<String, Order>();
+		orders.put("dummy", null);
+		AppResponse<Void> placeBulkOrdersResponse = api.placeBulkOrders(orders);
+		System.out.println("placeBulkOrdersResponse = " + placeBulkOrdersResponse);
+		boolean testResult = placeBulkOrdersResponse.errorDetails == null;
+		Assert.assertTrue("testPlaceBulkOrdersMapDummySuccess", testResult);
+	}
+
 	private Order getSuccessOrder()
 	{
 		Order order = new Order();

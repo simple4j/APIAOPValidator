@@ -100,35 +100,62 @@
 					<property name="maxSize" value="3" />
 					<property name="entryValidators">
 						<list>
-							<bean class="org.simple4j.apiaopvalidator.validation.NullValidator" />
-							<bean class="org.simple4j.apiaopvalidator.validation.BeanValidator" >
-								<property name="doNullCheck" value="true" />
-								<property name="fieldName" value="someKey" />
+							<bean class="org.simple4j.apiaopvalidator.validation.RegexMatchDelegator" >
 								<property name="propertyPath" value="key" />
-								<property name="validators">
-									<list>
-										<bean class="org.simple4j.apiaopvalidator.validation.NullValidator" />
-										<bean class="org.simple4j.apiaopvalidator.validation.MaxLengthValidator" >
-											<property name="maxLength" value="10"></property>
-										</bean>
-									</list>
-								</property>
-							</bean>
-							<bean class="org.simple4j.apiaopvalidator.validation.BeanValidator" >
-								<property name="doNullCheck" value="true" />
-								<property name="fieldName" value="order" />
-								<property name="propertyPath" value="value" />
+								<property name="notMatchRegex" value="^(dummy)$" />
 								<property name="validators">
 									<list>
 										<bean class="org.simple4j.apiaopvalidator.validation.NullValidator" />
 										<bean class="org.simple4j.apiaopvalidator.validation.BeanValidator" >
 											<property name="doNullCheck" value="true" />
-											<property name="fieldName" value="orderItems" />
-											<property name="propertyPath" value="orderItems" />
+											<property name="fieldName" value="someKey" />
+											<property name="propertyPath" value="key" />
 											<property name="validators">
 												<list>
 													<bean class="org.simple4j.apiaopvalidator.validation.NullValidator" />
-													<ref bean="orderItemsValidator"/>
+													<bean class="org.simple4j.apiaopvalidator.validation.MaxLengthValidator" >
+														<property name="maxLength" value="10"></property>
+													</bean>
+												</list>
+											</property>
+										</bean>
+										<bean class="org.simple4j.apiaopvalidator.validation.BeanValidator" >
+											<property name="doNullCheck" value="true" />
+											<property name="fieldName" value="order" />
+											<property name="propertyPath" value="value" />
+											<property name="validators">
+												<list>
+													<bean class="org.simple4j.apiaopvalidator.validation.NullValidator" />
+													<bean class="org.simple4j.apiaopvalidator.validation.BeanValidator" >
+														<property name="doNullCheck" value="true" />
+														<property name="fieldName" value="orderItems" />
+														<property name="propertyPath" value="orderItems" />
+														<property name="validators">
+															<list>
+																<bean class="org.simple4j.apiaopvalidator.validation.NullValidator" />
+																<ref bean="orderItemsValidator"/>
+															</list>
+														</property>
+													</bean>
+												</list>
+											</property>
+										</bean>
+									</list>
+								</property>
+							</bean>
+							<bean class="org.simple4j.apiaopvalidator.validation.RegexMatchDelegator" >
+								<property name="propertyPath" value="key" />
+								<property name="matchRegex" value="^(dummy)$" />
+								<property name="validators">
+									<list>
+										<bean class="org.simple4j.apiaopvalidator.validation.NullValidator" />
+										<bean class="org.simple4j.apiaopvalidator.validation.BeanValidator" >
+											<property name="doNullCheck" value="true" />
+											<property name="fieldName" value="order" />
+											<property name="propertyPath" value="value" />
+											<property name="validators">
+												<list>
+												<!-- this list is empty to just avoid all checks when key is dummy-->
 												</list>
 											</property>
 										</bean>
