@@ -270,6 +270,44 @@ public class MainTest
 	}
 
 	@Test
+	public void testPlaceOrderInvalidProductName2()
+	{
+		Order order = new Order();
+		List<OrderItem> orderItems = new ArrayList<OrderItem>();
+		OrderItem oi = new OrderItem();
+		oi.setQuantity(1);
+		Product p = new Product();
+		p.setProductName("dummy");
+		oi.setProduct(p);
+		orderItems.add(oi);
+		order.setOrderItems(orderItems );
+		AppResponse<String> placeOrderResponse = api.placeOrder(order );
+		System.out.println("placeOrderResponse = " + placeOrderResponse);
+		boolean testResult = baseResponseCheck(placeOrderResponse) && 
+				placeOrderResponse.errorDetails.errorReason.contains("orderItems[0].product.productName-invalid");
+		Assert.assertTrue("testPlaceOrderInvalidProductName2", testResult);
+	}
+
+	@Test
+	public void testPlaceOrderInvalidProductName3()
+	{
+		Order order = new Order();
+		List<OrderItem> orderItems = new ArrayList<OrderItem>();
+		OrderItem oi = new OrderItem();
+		oi.setQuantity(1);
+		Product p = new Product();
+		p.setProductName("DUMMY");
+		oi.setProduct(p);
+		orderItems.add(oi);
+		order.setOrderItems(orderItems );
+		AppResponse<String> placeOrderResponse = api.placeOrder(order );
+		System.out.println("placeOrderResponse = " + placeOrderResponse);
+		boolean testResult = baseResponseCheck(placeOrderResponse) && 
+				placeOrderResponse.errorDetails.errorReason.contains("orderItems[0].product.productName-invalid");
+		Assert.assertTrue("testPlaceOrderInvalidProductName3", testResult);
+	}
+
+	@Test
 	public void testPlaceOrderSuccess()
 	{
 		Order order = getSuccessOrder();

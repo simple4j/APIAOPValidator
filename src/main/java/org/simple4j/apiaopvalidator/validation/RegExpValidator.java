@@ -2,6 +2,7 @@ package org.simple4j.apiaopvalidator.validation;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Pattern;
 
 /**
  * Validator implementation that checks a String value against a regular expression
@@ -17,6 +18,10 @@ public class RegExpValidator implements FieldValidator, Validator<Object>
      * This validator will fail if the String doesnot match regExp configuration
      */
     private String regExp = null;
+    
+    private boolean negation = false;
+    
+    private boolean casesensitive = true;
     
     public RegExpValidator()
     {
@@ -39,7 +44,15 @@ public class RegExpValidator implements FieldValidator, Validator<Object>
             strValue = "" + value;
         }
         
-        if(!strValue.matches(this.getRegExp()))
+        ;
+        if( !this.negation && !match(strValue) )
+        {
+        	List<String> ret = new ArrayList<String>();
+        	ret.add(fieldName + this.validationTypeSuffix);
+            return ret;
+        }
+        
+        if( this.negation && match(strValue) )
         {
         	List<String> ret = new ArrayList<String>();
         	ret.add(fieldName + this.validationTypeSuffix);
@@ -48,8 +61,25 @@ public class RegExpValidator implements FieldValidator, Validator<Object>
         return null;
     }
 
+    private Pattern pattern = null;
+    
+	private boolean match(String strValue)
+	{
+		if(this.pattern == null)
+		{
+			if(this.isCasesensitive())
+				pattern = Pattern.compile(this.getRegExp());
+			else
+				pattern = Pattern.compile(this.getRegExp(), Pattern.CASE_INSENSITIVE);
+		}
+		
+        return pattern.matcher(strValue).matches();
+	}
+
     public String getRegExp()
     {
+    	if(this.regExp == null || this.regExp.trim().length() < 1)
+    		throw new RuntimeException("regexp not configured");
         return regExp;
     }
 
@@ -58,7 +88,27 @@ public class RegExpValidator implements FieldValidator, Validator<Object>
         this.regExp = regExp;
     }
 
-    @Override
+    public boolean isNegation()
+	{
+		return negation;
+	}
+
+	public void setNegation(boolean negation)
+	{
+		this.negation = negation;
+	}
+
+	public boolean isCasesensitive()
+	{
+		return casesensitive;
+	}
+
+	public void setCasesensitive(boolean casesensitive)
+	{
+		this.casesensitive = casesensitive;
+	}
+
+	@Override
     public String toString()
     {
         return "RegExpValidator [regExp=" + regExp + "]";

@@ -243,6 +243,12 @@
 										<bean class="org.simple4j.apiaopvalidator.validation.RegExpValidator" >
 											<property name="regExp" value="^[a-zA-Z]*$" />
 										</bean>
+										<!-- if negation is true the validation will fail if the regexp matches -->
+										<bean class="org.simple4j.apiaopvalidator.validation.RegExpValidator" >
+											<property name="negation" value="true" />
+											<property name="casesensitive" value="false" />
+											<property name="regExp" value="^(dummy)$" />
+										</bean>
 									</list>
 								</property>
 							</bean>
