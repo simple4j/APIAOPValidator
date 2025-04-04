@@ -15,12 +15,21 @@ public class RegExpValidator implements FieldValidator, Validator<Object>
     private static String validationTypeSuffix = "-invalid";
     
     /**
-     * This validator will fail if the String doesnot match regExp configuration
+     * This validator will fail if the String does not match regExp configuration.
+     * If the negation is set to true, validator will fail if the pattern matches.
      */
     private String regExp = null;
     
+    /**
+     * This boolean will reverse the matching rule when set to true.
+     * See documentation for regExp property
+     */
     private boolean negation = false;
-    
+
+    /**
+     * This property will define if the matching will be case sensitive or not.
+     * By default, it will be case sensitive.
+     */
     private boolean casesensitive = true;
     
     public RegExpValidator()
