@@ -65,6 +65,7 @@ public class BeanValidator implements Validator<Object>
         {
             //TODO: another option is to convert nested object tree to collections tree and use CollectionsPathRetreiver
             fieldValue = PropertyUtils.getNestedProperty(beanValues, this.getPropertyPath());
+            LOGGER.debug("retreived value {}", fieldValue);
         }
         catch (IllegalAccessException | InvocationTargetException | NoSuchMethodException e)
         {
@@ -72,11 +73,17 @@ public class BeanValidator implements Validator<Object>
             throw new RuntimeException("Exception while getting nested property targetbean:"+beanValues+", propertyPath:"+this.getPropertyPath(), e);
         }
         
-        if(getValidators() != null)
+        LOGGER.debug("validators are {}", this.getValidators());
+        if(getValidators() != null && getValidators().size()>0)
         {
             for (int i = 0 ; i < getValidators().size() ; i++)
             {
-                List<String> result = getValidators().get(i).validate(fieldName + "." + this.getFieldName(), fieldValue);
+            	LOGGER.debug("calling validator {}", getValidators().get(i));
+                String subFieldName = fieldName;
+                if(this.getFieldName().length() > 0)
+                	subFieldName = fieldName + "." + this.getFieldName();
+				List<String> result = getValidators().get(i).validate(subFieldName, fieldValue);
+            	LOGGER.debug("result {}", result);
                 if(result != null && result.size() > 0)
                 {
                 	if(getValidators().get(i) instanceof FieldValidator)
@@ -92,6 +99,8 @@ public class BeanValidator implements Validator<Object>
                 }
             }
         }
+        else
+        	LOGGER.info("validators is null or empty");
            
         return ret;
     }

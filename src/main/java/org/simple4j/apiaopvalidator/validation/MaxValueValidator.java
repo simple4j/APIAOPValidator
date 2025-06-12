@@ -58,10 +58,13 @@ public class MaxValueValidator implements FieldValidator, Validator<Object>
         this.maxValue = maxValue;
     }
 
-    @Override
-    public String toString()
-    {
-        return "MaxValueValidator [maxValue=" + maxValue + "]";
-    }
+	@Override
+	public String toString()
+	{
+		StringBuilder builder = new StringBuilder();
+		builder.append(super.toString()).append(" [maxValue=").append(maxValue).append("]");
+		return builder.toString();
+	}
+
 
 }

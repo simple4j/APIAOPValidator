@@ -31,7 +31,7 @@ public class MaxLengthValidator implements FieldValidator, Validator<Object>
         String strValue = null;
         if(value instanceof String)
         {
-            strValue = ((String) value).trim();
+            strValue = ((String) value);
         }
         else
         {
@@ -57,10 +57,13 @@ public class MaxLengthValidator implements FieldValidator, Validator<Object>
         this.maxLength = maxLength;
     }
 
-    @Override
-    public String toString()
-    {
-        return "MaxLengthValidator [maxLength=" + maxLength + "]";
-    }
+	@Override
+	public String toString()
+	{
+		StringBuilder builder = new StringBuilder();
+		builder.append(super.toString()).append(" [maxLength=").append(maxLength).append("]");
+		return builder.toString();
+	}
+
 
 }

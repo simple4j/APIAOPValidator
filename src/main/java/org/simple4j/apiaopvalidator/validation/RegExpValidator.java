@@ -1,8 +1,12 @@
 package org.simple4j.apiaopvalidator.validation;
 
+import java.lang.invoke.MethodHandles;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Pattern;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Validator implementation that checks a String value against a regular expression
@@ -12,6 +16,8 @@ import java.util.regex.Pattern;
  */
 public class RegExpValidator implements FieldValidator, Validator<Object>
 {
+    private static final Logger LOGGER = LoggerFactory.getLogger(MethodHandles.lookup().lookupClass());
+    
     private static String validationTypeSuffix = "-invalid";
     
     /**
@@ -45,7 +51,7 @@ public class RegExpValidator implements FieldValidator, Validator<Object>
         String strValue = null;
         if(value instanceof String)
         {
-            strValue = ((String) value).trim();
+            strValue =(String) value;
             
         }
         else
@@ -53,7 +59,7 @@ public class RegExpValidator implements FieldValidator, Validator<Object>
             strValue = "" + value;
         }
         
-        ;
+        LOGGER.debug("match {}", match(strValue));
         if( !this.negation && !match(strValue) )
         {
         	List<String> ret = new ArrayList<String>();
@@ -118,9 +124,13 @@ public class RegExpValidator implements FieldValidator, Validator<Object>
 	}
 
 	@Override
-    public String toString()
-    {
-        return "RegExpValidator [regExp=" + regExp + "]";
-    }
+	public String toString()
+	{
+		StringBuilder builder = new StringBuilder();
+		builder.append(super.toString()).append(" [regExp=").append(regExp).append(", negation=").append(negation)
+				.append(", casesensitive=").append(casesensitive).append("]");
+		return builder.toString();
+	}
+
 
 }

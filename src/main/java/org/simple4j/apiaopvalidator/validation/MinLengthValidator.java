@@ -31,7 +31,7 @@ public class MinLengthValidator implements FieldValidator, Validator<Object>
         String strValue = null;
         if(value instanceof String)
         {
-            strValue = ((String) value).trim();
+            strValue = ((String) value);
             
         }
         else
@@ -58,10 +58,13 @@ public class MinLengthValidator implements FieldValidator, Validator<Object>
         this.minLength = minLength;
     }
 
-    @Override
-    public String toString()
-    {
-        return "MinLengthValidator [minLength=" + minLength + "]";
-    }
+	@Override
+	public String toString()
+	{
+		StringBuilder builder = new StringBuilder();
+		builder.append(super.toString()).append(" [minLength=").append(minLength).append("]");
+		return builder.toString();
+	}
+
 
 }

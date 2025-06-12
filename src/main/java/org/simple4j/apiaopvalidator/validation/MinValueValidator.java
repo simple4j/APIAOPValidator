@@ -59,10 +59,12 @@ public class MinValueValidator implements FieldValidator, Validator<Object>
         this.minValue = minValue;
     }
 
-    @Override
-    public String toString()
-    {
-        return "MinValueValidator [minValue=" + minValue + "]";
-    }
+	@Override
+	public String toString()
+	{
+		StringBuilder builder = new StringBuilder();
+		builder.append(super.toString()).append(" [minValue=").append(minValue).append("]");
+		return builder.toString();
+	}
 
 }
