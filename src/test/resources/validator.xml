@@ -43,10 +43,6 @@
 					</list>
 				</entry>
 
-<!-- 
-	public AppResponse<List<String>> placeBulkOrders(Order[] orders);
-	public AppResponse<Void> placeBulkOrders(Map<String,Order> orders);
--->
 				<entry key="public abstract org.simple4j.apiaopvalidator.beans.AppResponse org.simple4j.apiapovalidator.test.testapi.japi.OrderAPI.placeBulkOrders(org.simple4j.apiapovalidator.test.testapi.japi.Order[])">
 					<list>
 						<ref bean="orderArrayValidator"/>
@@ -58,6 +54,13 @@
 						<ref bean="orderMapValidator"/>
 					</list>
 				</entry>
+
+				<entry key="public abstract org.simple4j.apiaopvalidator.beans.AppResponse org.simple4j.apiapovalidator.test.testapi.japi.OrderAPI.getMaxOrderPlacementTimeInTZ(java.lang.String)">
+					<list>
+						<ref bean="timeZoneIdValidator"/>
+					</list>
+				</entry>
+
 			</map>
 		</property>
 	</bean>
@@ -178,10 +181,26 @@
 			<list>
 				<bean class="org.simple4j.apiaopvalidator.validation.NullValidator" />
 				<bean class="org.simple4j.apiaopvalidator.validation.MinLengthValidator" >
+					<property name="trim" value="true"></property>
 					<property name="minLength" value="2"></property>
 				</bean>
 				<bean class="org.simple4j.apiaopvalidator.validation.MaxLengthValidator" >
+					<property name="trim" value="true"></property>
 					<property name="maxLength" value="16"></property>
+				</bean>
+			</list>
+		</property>
+	</bean>
+
+	<bean id="timeZoneIdValidator" class="org.simple4j.apiaopvalidator.validation.MethodArgumentValidator">
+		<property name="fieldName" value="timeZoneId" />
+		<property name="argumentIndex" value="0" />
+		<property name="validators">
+			<!--  list of validators to be applied on the field. For example, null check, minlength chheck etc. -->
+			<list>
+				<bean class="org.simple4j.apiaopvalidator.validation.NullValidator" />
+				<bean class="org.simple4j.apiaopvalidator.validation.TimeZoneValidator" >
+					<property name="trim" value="true"></property>
 				</bean>
 			</list>
 		</property>
@@ -241,6 +260,7 @@
 											<property name="maxLength" value="100" />
 										</bean>
 										<bean class="org.simple4j.apiaopvalidator.validation.RegExpValidator" >
+											<property name="trim" value="true" />
 											<property name="regExp" value="^[a-zA-Z]*$" />
 										</bean>
 										<!-- if negation is true the validation will fail if the regexp matches -->

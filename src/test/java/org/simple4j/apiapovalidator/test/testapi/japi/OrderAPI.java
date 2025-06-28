@@ -13,4 +13,7 @@ public interface OrderAPI
 	
 	public AppResponse<List<String>> placeBulkOrders(Order[] orders);
 	public AppResponse<Void> placeBulkOrders(Map<String,Order> orders);
+	
+	public AppResponse<String> getMaxOrderPlacementTimeInTZ(String timeZoneId);
+	
 }

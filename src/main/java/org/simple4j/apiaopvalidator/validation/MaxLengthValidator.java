@@ -17,7 +17,12 @@ public class MaxLengthValidator implements FieldValidator, Validator<Object>
      * This validator will fail if the length of the String is more than this maxLength configuration
      */
     private Integer maxLength = 0;
-    
+
+    /**
+     * Whether the value will be trimmed before applying validation.
+     */
+    private boolean trim = false;
+
     public MaxLengthValidator()
     {
         super();
@@ -38,6 +43,11 @@ public class MaxLengthValidator implements FieldValidator, Validator<Object>
             strValue = "" + value;
         }
         
+        if(this.isTrim())
+        {
+        	strValue = strValue.trim();
+        }
+
         if(strValue.length() > this.getMaxLength())
         {
         	List<String> ret = new ArrayList<String>();
@@ -56,6 +66,16 @@ public class MaxLengthValidator implements FieldValidator, Validator<Object>
     {
         this.maxLength = maxLength;
     }
+
+	public boolean isTrim()
+	{
+		return trim;
+	}
+
+	public void setTrim(boolean trim)
+	{
+		this.trim = trim;
+	}
 
 	@Override
 	public String toString()

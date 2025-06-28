@@ -17,7 +17,12 @@ public class MinValueValidator implements FieldValidator, Validator<Object>
      * This validator will fail if the value of the int or float is less than this minValue configuration
      */
     private double minValue = 0;
-    
+
+    /**
+     * Whether the value will be trimmed before applying validation.
+     */
+    private boolean trim = false;
+
     public MinValueValidator()
     {
         super();
@@ -36,8 +41,14 @@ public class MinValueValidator implements FieldValidator, Validator<Object>
         }
         else
         {
+            String strValue = "" + value;
+            if(this.isTrim())
+            {
+            	strValue = strValue.trim();
+            }
+
             if(value != null)
-                dblValue = Double.parseDouble("" + value);
+                dblValue = Double.parseDouble(strValue);
         }
         
         if(value == null || dblValue < this.getMinValue())
@@ -58,6 +69,16 @@ public class MinValueValidator implements FieldValidator, Validator<Object>
     {
         this.minValue = minValue;
     }
+
+	public boolean isTrim()
+	{
+		return trim;
+	}
+
+	public void setTrim(boolean trim)
+	{
+		this.trim = trim;
+	}
 
 	@Override
 	public String toString()

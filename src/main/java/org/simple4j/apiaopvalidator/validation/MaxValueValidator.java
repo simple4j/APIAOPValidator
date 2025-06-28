@@ -17,7 +17,12 @@ public class MaxValueValidator implements FieldValidator, Validator<Object>
      * This validator will fail if the value of the int or float is more than this maxValue configuration
      */
     private double maxValue = 0;
-    
+
+    /**
+     * Whether the value will be trimmed before applying validation.
+     */
+    private boolean trim = false;
+
     public MaxValueValidator()
     {
         super();
@@ -36,7 +41,13 @@ public class MaxValueValidator implements FieldValidator, Validator<Object>
         }
         else
         {
-            dblValue = Double.parseDouble("" + value);
+            String strValue = "" + value;
+            if(this.isTrim())
+            {
+            	strValue = strValue.trim();
+            }
+
+            dblValue = Double.parseDouble(strValue);
         }
         
         if(dblValue > this.getMaxValue())
@@ -57,6 +68,16 @@ public class MaxValueValidator implements FieldValidator, Validator<Object>
     {
         this.maxValue = maxValue;
     }
+
+	public boolean isTrim()
+	{
+		return trim;
+	}
+
+	public void setTrim(boolean trim)
+	{
+		this.trim = trim;
+	}
 
 	@Override
 	public String toString()

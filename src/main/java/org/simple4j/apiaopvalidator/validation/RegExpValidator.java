@@ -37,7 +37,12 @@ public class RegExpValidator implements FieldValidator, Validator<Object>
      * By default, it will be case sensitive.
      */
     private boolean casesensitive = true;
-    
+
+    /**
+     * Whether the value will be trimmed before applying validation.
+     */
+    private boolean trim = false;
+
     public RegExpValidator()
     {
         super();
@@ -59,6 +64,11 @@ public class RegExpValidator implements FieldValidator, Validator<Object>
             strValue = "" + value;
         }
         
+        if(this.isTrim())
+        {
+        	strValue = strValue.trim();
+        }
+
         LOGGER.debug("match {}", match(strValue));
         if( !this.negation && !match(strValue) )
         {
@@ -121,6 +131,16 @@ public class RegExpValidator implements FieldValidator, Validator<Object>
 	public void setCasesensitive(boolean casesensitive)
 	{
 		this.casesensitive = casesensitive;
+	}
+
+	public boolean isTrim()
+	{
+		return trim;
+	}
+
+	public void setTrim(boolean trim)
+	{
+		this.trim = trim;
 	}
 
 	@Override

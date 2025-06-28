@@ -232,6 +232,25 @@ public class MainTest
 	}
 
 	@Test
+	public void testPlaceOrderMinLengthTrimProductName()
+	{
+		Order order = new Order();
+		List<OrderItem> orderItems = new ArrayList<OrderItem>();
+		OrderItem oi = new OrderItem();
+		oi.setQuantity(1);
+		Product p = new Product();
+		p.setProductName("a ");
+		oi.setProduct(p);
+		orderItems.add(oi);
+		order.setOrderItems(orderItems );
+		AppResponse<String> placeOrderResponse = api.placeOrder(order );
+		System.out.println("testPlaceOrderMinLengthTrimProductName>placeOrderResponse = " + placeOrderResponse);
+		boolean testResult = baseResponseCheck(placeOrderResponse) && 
+				!placeOrderResponse.errorDetails.errorReason.contains("orderItems[0].product.productName-minlength");
+		Assert.assertTrue("testPlaceOrderMinLengthTrimProductName", testResult);
+	}
+
+	@Test
 	public void testPlaceOrderMaxLengthProductName()
 	{
 		Order order = new Order();
@@ -248,6 +267,25 @@ public class MainTest
 		boolean testResult = baseResponseCheck(placeOrderResponse) && 
 				placeOrderResponse.errorDetails.errorReason.contains("orderItems[0].product.productName-maxlength");
 		Assert.assertTrue("testPlaceOrderMaxLengthProductName", testResult);
+	}
+
+	@Test
+	public void testPlaceOrderMaxLengthTrimProductName()
+	{
+		Order order = new Order();
+		List<OrderItem> orderItems = new ArrayList<OrderItem>();
+		OrderItem oi = new OrderItem();
+		oi.setQuantity(1);
+		Product p = new Product();
+		p.setProductName("0123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789 ");
+		oi.setProduct(p);
+		orderItems.add(oi);
+		order.setOrderItems(orderItems );
+		AppResponse<String> placeOrderResponse = api.placeOrder(order );
+		System.out.println("testPlaceOrderMaxLengthTrimProductName>placeOrderResponse = " + placeOrderResponse);
+		boolean testResult = baseResponseCheck(placeOrderResponse) && 
+				placeOrderResponse.errorDetails.errorReason.contains("orderItems[0].product.productName-maxlength");
+		Assert.assertTrue("testPlaceOrderMaxLengthTrimProductName", testResult);
 	}
 
 	@Test
@@ -270,6 +308,44 @@ public class MainTest
 	}
 
 	@Test
+	public void testPlaceOrderInvalidProductNameTrim()
+	{
+		Order order = new Order();
+		List<OrderItem> orderItems = new ArrayList<OrderItem>();
+		OrderItem oi = new OrderItem();
+		oi.setQuantity(1);
+		Product p = new Product();
+		p.setProductName("aa");
+		oi.setProduct(p);
+		orderItems.add(oi);
+		order.setOrderItems(orderItems );
+		AppResponse<String> placeOrderResponse = api.placeOrder(order );
+		System.out.println("testPlaceOrderInvalidProductNameTrim>placeOrderResponse = " + placeOrderResponse);
+		boolean testResult = baseResponseCheck(placeOrderResponse) && 
+				!placeOrderResponse.errorDetails.errorReason.contains("orderItems[0].product.productName-invalid");
+		Assert.assertTrue("testPlaceOrderInvalidProductNameTrim", testResult);
+	}
+
+	@Test
+	public void testPlaceOrderInvalidProductNameTrim1()
+	{
+		Order order = new Order();
+		List<OrderItem> orderItems = new ArrayList<OrderItem>();
+		OrderItem oi = new OrderItem();
+		oi.setQuantity(1);
+		Product p = new Product();
+		p.setProductName("aa ");
+		oi.setProduct(p);
+		orderItems.add(oi);
+		order.setOrderItems(orderItems );
+		AppResponse<String> placeOrderResponse = api.placeOrder(order );
+		System.out.println("testPlaceOrderInvalidProductNameTrim1>placeOrderResponse = " + placeOrderResponse);
+		boolean testResult = baseResponseCheck(placeOrderResponse) && 
+				!placeOrderResponse.errorDetails.errorReason.contains("orderItems[0].product.productName-invalid");
+		Assert.assertTrue("testPlaceOrderInvalidProductNameTrim1", testResult);
+	}
+
+	@Test
 	public void testPlaceOrderInvalidProductName2()
 	{
 		Order order = new Order();
@@ -286,6 +362,25 @@ public class MainTest
 		boolean testResult = baseResponseCheck(placeOrderResponse) && 
 				placeOrderResponse.errorDetails.errorReason.contains("orderItems[0].product.productName-invalid");
 		Assert.assertTrue("testPlaceOrderInvalidProductName2", testResult);
+	}
+
+	@Test
+	public void testPlaceOrderInvalidProductNameTrim2()
+	{
+		Order order = new Order();
+		List<OrderItem> orderItems = new ArrayList<OrderItem>();
+		OrderItem oi = new OrderItem();
+		oi.setQuantity(1);
+		Product p = new Product();
+		p.setProductName("dummy ");
+		oi.setProduct(p);
+		orderItems.add(oi);
+		order.setOrderItems(orderItems );
+		AppResponse<String> placeOrderResponse = api.placeOrder(order );
+		System.out.println("testPlaceOrderInvalidProductNameTrim2>placeOrderResponse = " + placeOrderResponse);
+		boolean testResult = baseResponseCheck(placeOrderResponse) && 
+				!placeOrderResponse.errorDetails.errorReason.contains("orderItems[0].product.productName-invalid");
+		Assert.assertTrue("testPlaceOrderInvalidProductNameTrim2", testResult);
 	}
 
 	@Test
@@ -353,6 +448,17 @@ public class MainTest
 	}
 
 	@Test
+	public void testGetOrderMinLengthTrimOrderId()
+	{
+		String orderId = "1 ";
+		AppResponse<Order> getOrderResponse = api.getOrder(orderId );
+		System.out.println("getOrderResponse = " + getOrderResponse);
+		boolean testResult = baseResponseCheck(getOrderResponse) && 
+				getOrderResponse.errorDetails.errorReason.contains("orderId-minlength");
+		Assert.assertTrue("testGetOrderMinLengthTrimOrderId", testResult);
+	}
+
+	@Test
 	public void testGetOrderMaxLengthOrderId()
 	{
 		String orderId = "01234567890123456";
@@ -361,6 +467,18 @@ public class MainTest
 		boolean testResult = baseResponseCheck(getOrderResponse) && 
 				getOrderResponse.errorDetails.errorReason.contains("orderId-maxlength");
 		Assert.assertTrue("testGetOrderMaxLengthOrderId", testResult);
+	}
+
+	@Test
+	public void testGetOrderMaxLengthTrimOrderId()
+	{
+		String orderId = "0123456789012345 ";
+		AppResponse<Order> getOrderResponse = api.getOrder(orderId );
+		System.out.println("testGetOrderMaxLengthTrimOrderId>getOrderResponse = " + getOrderResponse);
+		boolean testResult =  
+				getOrderResponse.errorDetails == null
+				&& getOrderResponse.responseObject != null;
+		Assert.assertTrue("testGetOrderMaxLengthTrimOrderId", testResult);
 	}
 
 	@Test
@@ -542,6 +660,37 @@ public class MainTest
 		orderItems.add(oi);
 		order.setOrderItems(orderItems );
 		return order;
+	}
+	
+	@Test
+	public void testgetMaxOrderPlacementTimeInTZNInvalid()
+	{
+		String timeZoneId = "Asia/Kolkataaa";
+		AppResponse<String> getMaxOrderPlacementTimeInTZResponse = api.getMaxOrderPlacementTimeInTZ(timeZoneId);
+		System.out.println("testgetMaxOrderPlacementTimeInTZNInvalid>getMaxOrderPlacementTimeInTZResponse = " + getMaxOrderPlacementTimeInTZResponse);
+		boolean testResult = baseResponseCheck(getMaxOrderPlacementTimeInTZResponse) && 
+				getMaxOrderPlacementTimeInTZResponse.errorDetails.errorReason.contains("timeZoneId-invalid");
+		Assert.assertTrue("testgetMaxOrderPlacementTimeInTZNInvalid", testResult);
+	}
+
+	@Test
+	public void testgetMaxOrderPlacementTimeInTZNInvalidTrim()
+	{
+		String timeZoneId = "Asia/Kolkata  ";
+		AppResponse<String> getMaxOrderPlacementTimeInTZResponse = api.getMaxOrderPlacementTimeInTZ(timeZoneId);
+		System.out.println("testgetMaxOrderPlacementTimeInTZNInvalidTrim>getMaxOrderPlacementTimeInTZResponse = " + getMaxOrderPlacementTimeInTZResponse);
+		boolean testResult = getMaxOrderPlacementTimeInTZResponse.errorDetails == null && getMaxOrderPlacementTimeInTZResponse.responseObject != null;
+		Assert.assertTrue("testgetMaxOrderPlacementTimeInTZNInvalidTrim", testResult);
+	}
+
+	@Test
+	public void testgetMaxOrderPlacementTimeInTZNSuccess()
+	{
+		String timeZoneId = "Asia/Kolkata";
+		AppResponse<String> getMaxOrderPlacementTimeInTZResponse = api.getMaxOrderPlacementTimeInTZ(timeZoneId);
+		System.out.println("testgetMaxOrderPlacementTimeInTZNSuccess>getMaxOrderPlacementTimeInTZResponse = " + getMaxOrderPlacementTimeInTZResponse);
+		boolean testResult = getMaxOrderPlacementTimeInTZResponse.errorDetails == null && getMaxOrderPlacementTimeInTZResponse.responseObject != null;
+		Assert.assertTrue("testgetMaxOrderPlacementTimeInTZNSuccess", testResult);
 	}
 
 	private boolean baseResponseCheck(AppResponse appResponse)

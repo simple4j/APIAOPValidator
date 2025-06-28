@@ -49,5 +49,11 @@ public class OrderAPIImpl implements OrderAPI
 		return ret ;
 	}
 
+	public AppResponse<String> getMaxOrderPlacementTimeInTZ(String timeZoneId)
+	{
+		AppResponse<String> ret = new AppResponse<String>();
+		ret.responseObject = "2025-06-30 17:23:00";
+		return ret ;
+	}
 
 }
