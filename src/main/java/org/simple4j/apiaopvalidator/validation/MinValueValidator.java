@@ -84,7 +84,8 @@ public class MinValueValidator implements FieldValidator, Validator<Object>
 	public String toString()
 	{
 		StringBuilder builder = new StringBuilder();
-		builder.append(super.toString()).append(" [minValue=").append(minValue).append("]");
+		builder.append(super.toString()).append(" [minValue=").append(minValue).append(", trim=").append(trim)
+				.append("]");
 		return builder.toString();
 	}
 

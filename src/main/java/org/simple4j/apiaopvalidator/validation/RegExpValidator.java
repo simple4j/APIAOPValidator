@@ -148,7 +148,8 @@ public class RegExpValidator implements FieldValidator, Validator<Object>
 	{
 		StringBuilder builder = new StringBuilder();
 		builder.append(super.toString()).append(" [regExp=").append(regExp).append(", negation=").append(negation)
-				.append(", casesensitive=").append(casesensitive).append("]");
+				.append(", casesensitive=").append(casesensitive).append(", trim=").append(trim).append(", pattern=")
+				.append(pattern).append("]");
 		return builder.toString();
 	}
 

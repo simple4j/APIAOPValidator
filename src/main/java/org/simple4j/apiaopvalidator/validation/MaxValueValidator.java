@@ -83,7 +83,8 @@ public class MaxValueValidator implements FieldValidator, Validator<Object>
 	public String toString()
 	{
 		StringBuilder builder = new StringBuilder();
-		builder.append(super.toString()).append(" [maxValue=").append(maxValue).append("]");
+		builder.append(super.toString()).append(" [maxValue=").append(maxValue).append(", trim=").append(trim)
+				.append("]");
 		return builder.toString();
 	}
 

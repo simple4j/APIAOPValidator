@@ -81,7 +81,7 @@ public class MaxLengthValidator implements FieldValidator, Validator<Object>
 	public String toString()
 	{
 		StringBuilder builder = new StringBuilder();
-		builder.append(super.toString()).append(" [maxLength=").append(maxLength).append("]");
+		builder.append(super.toString()).append(" [maxLength=").append(maxLength).append(", trim=").append(trim).append("]");
 		return builder.toString();
 	}
 

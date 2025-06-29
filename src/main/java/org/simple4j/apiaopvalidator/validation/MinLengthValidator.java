@@ -82,7 +82,8 @@ public class MinLengthValidator implements FieldValidator, Validator<Object>
 	public String toString()
 	{
 		StringBuilder builder = new StringBuilder();
-		builder.append(super.toString()).append(" [minLength=").append(minLength).append("]");
+		builder.append(super.toString()).append(" [minLength=").append(minLength).append(", trim=").append(trim)
+				.append("]");
 		return builder.toString();
 	}
 
