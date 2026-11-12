@@ -4,7 +4,7 @@
 	<groupId>org.simple4j</groupId>
 	<artifactId>APIAOPValidator</artifactId>
 	<packaging>jar</packaging>
-	<version>26.11.09.0</version>
+	<version>26.11.09.1-SNAPSHOT</version>
 	<name>APIAOPValidator</name>
 	<url>https://github.com/simple4j/APIAOPValidator</url>
 	<licenses>
