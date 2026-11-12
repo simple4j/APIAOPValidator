@@ -4,7 +4,7 @@
 	<groupId>org.simple4j</groupId>
 	<artifactId>APIAOPValidator</artifactId>
 	<packaging>jar</packaging>
-	<version>25.06.30.1-SNAPSHOT</version>
+	<version>26.11.09.0-SNAPSHOT</version>
 	<name>APIAOPValidator</name>
 	<url>https://github.com/simple4j/APIAOPValidator</url>
 	<licenses>
@@ -46,7 +46,7 @@
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-aop</artifactId>
-			<version>6.1.13</version>
+			<version>7.0.10</version>
 		</dependency>
 		<dependency>
 			<groupId>commons-beanutils</groupId>
@@ -64,25 +64,25 @@
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-beans</artifactId>
-			<version>6.1.13</version>
+			<version>7.0.10</version>
 			<scope>test</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-context</artifactId>
-			<version>6.1.13</version>
+			<version>7.0.10</version>
 			<scope>test</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-context-support</artifactId>
-			<version>6.1.13</version>
+			<version>7.0.10</version>
 			<scope>test</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-core</artifactId>
-			<version>6.1.13</version>
+			<version>7.0.10</version>
 			<scope>test</scope>
 		</dependency>
 
@@ -115,7 +115,7 @@
 		<dependency>
 			<groupId>org.aspectj</groupId>
 			<artifactId>aspectjweaver</artifactId>
-			<version>1.8.2</version>
+			<version>1.9.25</version>
 			<scope>runtime</scope>
 		</dependency>
 	</dependencies>
@@ -226,7 +226,6 @@
 	This is a simple configurable validation library for web services API validation using AOP.
 	</description>
 	<properties>
-		<maven.compiler.source>17</maven.compiler.source>
-		<maven.compiler.target>17</maven.compiler.target>
+		<maven.compiler.release>25</maven.compiler.release>
 	</properties>
 </project>
